@@ -15,10 +15,16 @@ class CreateProdutosTable extends Migration
     {
         Schema::create('produtos', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('produto_nome');
             $table->text('referencia');
             $table->text('descricao');
             $table->string('marca');
             $table->float('preco_venda');
+             $table->bigInteger('marca_produto_id')->unsigned();
+
+            $table->foreign('marca_produto_id')
+                ->references('id')->on('marcas')
+                ->onDelete('cascade');
             $table->timestamps();
         });
     }

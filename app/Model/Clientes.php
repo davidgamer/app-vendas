@@ -9,6 +9,7 @@ use App\Model\Venda;
 
 class Clientes extends Model
 {
+
     public function enderecos (){
         return $this->hasMany(Enderecos::class);
     }

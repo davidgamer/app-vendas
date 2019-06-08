@@ -8,6 +8,7 @@ use App\Model\Produto;
 
 class ItemVenda extends Model
 {
+
   public function vendas(){
         return $this->belongsTo(Venda::class);
     }

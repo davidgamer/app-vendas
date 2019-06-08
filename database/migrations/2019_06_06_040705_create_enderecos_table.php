@@ -15,13 +15,13 @@ class CreateEnderecosTable extends Migration
     {
         Schema::create('enderecos', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('cep');
+            $table->longText('cep');
             $table->string('bairro');
             $table->string('rua');
             $table->integer('numero');
-            $table->bigInteger('cliente_telefone_id')->unsigned()->nullable();
+            $table->bigInteger('cliente_enderecos_id')->unsigned()->nullable();
 
-            $table->foreign('cliente_telefone_id')
+            $table->foreign('cliente_enderecos_id')
                     ->references('id')->on('clientes')
                     ->onDelete('cascade');
 

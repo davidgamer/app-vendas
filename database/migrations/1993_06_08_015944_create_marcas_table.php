@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateVendasTable extends Migration
+class CreateMarcasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,9 @@ class CreateVendasTable extends Migration
      */
     public function up()
     {
-        Schema::create('vendas', function (Blueprint $table) {
+        Schema::create('marcas', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->float('total_venda');
-            $table->bigInteger('cliente_venda_id')->unsigned()->nullable();
-
-            $table->foreign('cliente_venda_id')
-                    ->references('id')->on('clientes')
-                    ->onDelete('cascade');
+            $table->string('nome');
             $table->timestamps();
         });
     }
@@ -32,6 +27,6 @@ class CreateVendasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('vendas');
+        Schema::dropIfExists('marcas');
     }
 }

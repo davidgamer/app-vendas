@@ -14,7 +14,8 @@ class ClientesController extends Controller
      */
     public function index()
     {
-        //
+        $clientes = Clientes::all();
+        return view('clientes.index')->with('clientes', $clientes);
     }
 
     /**
@@ -24,7 +25,7 @@ class ClientesController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -46,7 +47,7 @@ class ClientesController extends Controller
      */
     public function show($id)
     {
-        //
+
     }
 
     /**
