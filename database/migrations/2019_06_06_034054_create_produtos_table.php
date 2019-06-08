@@ -18,7 +18,7 @@ class CreateProdutosTable extends Migration
             $table->string('produto_nome');
             $table->text('referencia');
             $table->text('descricao');
-            $table->string('marca');
+
             $table->float('preco_venda');
              $table->bigInteger('marca_produto_id')->unsigned();
 

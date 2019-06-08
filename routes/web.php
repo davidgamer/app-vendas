@@ -18,3 +18,5 @@
 
 Route::resource('/clientes', 'ClientesController');
 Route::resource('/produtos', 'ProdutosController');
+Route::resource('/vendas', 'VendaController');
+Route::resource('/estoques', 'EstoqueController');

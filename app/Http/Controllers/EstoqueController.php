@@ -4,10 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Model\Produtos;
-use App\Model\Marca;
 use App\Model\Estoque;
 
-class ProdutosController extends Controller
+class EstoqueController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +15,7 @@ class ProdutosController extends Controller
      */
     public function index()
     {
-        $produtos = Produtos::with('estoques')->orderBy('created_at', 'ASC')->get();
-
-        return view('produtos.index')->with('produtos', $produtos);
+        //
     }
 
     /**
@@ -28,8 +25,8 @@ class ProdutosController extends Controller
      */
     public function create()
     {
-        $marcas = Marca::all();
-        return view('produtos.create')->with('marcas', $marcas);
+        $produtos = Produtos::all();
+        return view('estoque.create')->with('produtos', $produtos);
     }
 
     /**
@@ -40,17 +37,9 @@ class ProdutosController extends Controller
      */
     public function store(Request $request)
     {
-        $produto = new Produtos;
-        $produto->produto_nome = $request->produto_nome;
-        $produto->referencia = $request->referencia;
-        $produto->descricao = $request->descricao;
-        $produto->preco_venda = $request->preco_venda;
-        $produto->marca_produto_id = $request->marca_produto_id;
-        $produto->save();
-
         $estoque = new Estoque;
         $estoque->quantidade_estoque = $request->quantidade_estoque;
-        $estoque->produto_estoque_id = $produto->id;
+        $estoque->produto_estoque_id = $request->produto_estoque_id;
         $estoque->save();
 
         return redirect('/produtos');
@@ -75,9 +64,7 @@ class ProdutosController extends Controller
      */
     public function edit($id)
     {
-         $marcas = Marca::all();
-         $produto = Produtos::find($id);
-        return view('produtos.edit')->with(compact('marcas', 'produto'));
+        //
     }
 
     /**
@@ -89,14 +76,7 @@ class ProdutosController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $produto = Produtos::find($id);
-        $produto->produto_nome = $request->produto_nome;
-        $produto->referencia = $request->referencia;
-        $produto->descricao = $request->descricao;
-        $produto->preco_venda = $request->preco_venda;
-        $produto->marca_produto_id = $request->marca_produto_id;
-        $produto->save();
-        return redirect('/produtos');
+        //
     }
 
     /**
@@ -107,8 +87,6 @@ class ProdutosController extends Controller
      */
     public function destroy($id)
     {
-        $produto = Produtos::find($id);
-        $produto->delete();
-        return redirect('/produtos');
+        //
     }
 }

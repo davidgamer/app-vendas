@@ -11,8 +11,11 @@
       <li class="nav-item">
         <a class="nav-link" href="/clientes">Clientes</a>
       </li>
- <li class="nav-item">
-        <a class="nav-link" href="/produtos">Produtos</a>
+        <li class="nav-item">
+            <a class="nav-link" href="/produtos">Produtos</a>
+      </li>
+       <li class="nav-item">
+            <a class="nav-link" href="/Vendas">Vendas</a>
       </li>
     </ul>
     <form class="form-inline my-2 my-lg-0">
