@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Model\Produtos;
+use App\Model\Clientes;
 
 class VendaController extends Controller
 {
@@ -13,7 +15,9 @@ class VendaController extends Controller
      */
     public function index()
     {
-        //
+        $produtos = Produtos::has('estoques')->get();
+        $clientes = Clientes::all();
+        return view('vendas.index')->with(compact('produtos', 'clientes'));
     }
 
     /**

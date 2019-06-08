@@ -15,6 +15,6 @@ class Produtos extends Model
         return $this->belongsTo(Marca::class);
     }
       public function estoques(){
-        return $this->hasMany(Estoque::class, 'produto_estoque_id');
+        return $this->hasOne(Estoque::class, 'produto_estoque_id');
     }
 }

@@ -9,6 +9,6 @@ class Estoque extends Model
 {
 
     public function produtos(){
-        return $this->belongsTo(Produtos::class);
+        return $this->belongsTo(Produtos::class, 'produto_estoque_id');
     }
 }

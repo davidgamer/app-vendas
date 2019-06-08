@@ -20,7 +20,7 @@ class CreateItemVendasTable extends Migration
                       ->references('id')->on('vendas')
                       ->onDelete('cascade');
 
-                      $table->bigInteger('produto_item_venda_id')->unsigned();
+                $table->bigInteger('produto_item_venda_id')->unsigned();
                 $table->foreign('produto_item_venda_id')
                       ->references('id')->on('produtos')
                       ->onDelete('cascade');

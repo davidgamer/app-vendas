@@ -16,7 +16,7 @@ class ProdutosController extends Controller
      */
     public function index()
     {
-        $produtos = Produtos::with('estoques')->orderBy('created_at', 'ASC')->get();
+        $produtos = Produtos::with('estoques')->has('estoques')->get();
 
         return view('produtos.index')->with('produtos', $produtos);
     }
