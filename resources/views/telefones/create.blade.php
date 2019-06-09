@@ -9,7 +9,7 @@
         <form class="form-horizontal" method="post" action="{{url('telefones')}}">
               {{csrf_field()}}
                  <div class="form-group">
-                    <label for="">Quantidade em estque</label>
+                    <label for="">Número</label>
                     <input  name="telefones_clientes_id" type="hidden" value="{{$id}}">
                     <input type="text" name="telefone" class="form-control" placeholder="Telefone">
                 </div>

@@ -45,7 +45,21 @@
                             <p>Bairro: {{$endereco->bairro}}</p>
                             <p>RUA: {{$endereco->rua}}</p>
                             <p>NUMÉRO: {{$endereco->numero}}</p>
-                            <p><a href="/enderecos/{{$endereco->id}}/edit" class="btn btn-warning">Editar</a></p>
+                            <p><a href="/enderecos/{{$endereco->id}}/edit" class="btn btn-warning">Editar</a>
+                        <form  class="form-row"
+                        action="/enderecos/{{$endereco->id}}"
+                        method="POST"
+                    >
+                        {{ csrf_field() }}
+                        {{ method_field("DELETE") }}
+                        <button
+                            type="submit"
+                            value="Deletar"
+                            class="btn btn-danger btn-small"
+                        >
+                            Deletar
+                        </button>
+                    </form></p>
                         @endforeach
                 </article>
             </div>

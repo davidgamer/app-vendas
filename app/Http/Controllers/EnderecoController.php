@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Model\Enderecos;
-
+use Illuminate\Support\Facades\Validator;
 class EnderecoController extends Controller
 {
     /**
@@ -35,15 +35,20 @@ class EnderecoController extends Controller
      */
     public function store(Request $request)
     {
+        Validator::make($request->all(), [
+          'cep' => 'required|max:255',
+          'bairro' => 'required|max:255',
+          'rua' =>'required|max:255',
+          'numero'=>'required|numeric'
+        ])->validate();
         $endereco = new Enderecos;
         $endereco->cep = $request->cep;
         $endereco->bairro = $request->bairro;
         $endereco->rua = $request->rua;
         $endereco->numero = $request->numero;
-        $request->cliente_enderecos_id = $request->cliente_enderecos_id;
+        $endereco->cliente_enderecos_id = $request->cliente_enderecos_id;
         $endereco->save();
-        return redirect()->back();
-    }
+        return redirect('/clientes/'.$request->cliente_enderecos_id);    }
 
     /**
      * Display the specified resource.
@@ -64,8 +69,8 @@ class EnderecoController extends Controller
      */
     public function edit($id)
     {
-           $endereco = Enderecos::find($id);
-           return view('enderecos.edit')->with('endereco', $endereco);
+        $endereco = Enderecos::find($id);
+        return view('enderecos.edit')->with('endereco', $endereco);
     }
 
     /**
@@ -77,6 +82,13 @@ class EnderecoController extends Controller
      */
     public function update(Request $request, $id)
     {
+        Validator::make($request->all(), [
+          'cep' => 'required|max:255',
+          'bairro' => 'required|max:255',
+          'rua' =>'required|max:255',
+          'numero'=>'required|numeric'
+        ])->validate();
+
         $endereco = Enderecos::find($id);
         $endereco->cep = $request->cep;
         $endereco->bairro = $request->bairro;
@@ -84,7 +96,7 @@ class EnderecoController extends Controller
         $endereco->numero = $request->numero;
         $request->cliente_enderecos_id = $request->cliente_enderecos_id;
         $endereco->save();
-        return redirect()->back();
+        return redirect('/clientes/'.$request->cliente_enderecos_id);
     }
 
     /**

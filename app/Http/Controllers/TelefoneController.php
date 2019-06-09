@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Model\Telefones;
-
+use Illuminate\Support\Facades\Validator;
 class TelefoneController extends Controller
 {
     /**
@@ -35,11 +35,15 @@ class TelefoneController extends Controller
      */
     public function store(Request $request)
     {
+
+        Validator::make($request->all(), [
+          'telefone' => 'required|max:255',
+        ])->validate();
         $telefone = new Telefones;
         $telefone->telefone = $request->telefone;
         $telefone->telefones_clientes_id = $request->telefones_clientes_id;
         $telefone->save();
-        return redirect()->back();
+        return redirect('/clientes/'.$request->telefones_clientes_id);
     }
 
     /**

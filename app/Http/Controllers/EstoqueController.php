@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Model\Produtos;
 use App\Model\Estoque;
-
+use Illuminate\Support\Facades\Validator;
 class EstoqueController extends Controller
 {
     /**
@@ -37,10 +37,27 @@ class EstoqueController extends Controller
      */
     public function store(Request $request)
     {
-        $estoque = new Estoque;
-        $estoque->quantidade_estoque = $request->quantidade_estoque;
-        $estoque->produto_estoque_id = $request->produto_estoque_id;
-        $estoque->save();
+        Validator::make($request->all(), [
+          'quantidade_estoque'=>'required|numeric'
+        ])->validate();
+        $e = Estoque::where('produto_estoque_id', $request->produto_estoque_id)->first();
+        if(!$e){
+            $estoque = new Estoque;
+            $estoque->quantidade_estoque = $request->quantidade_estoque;
+            $estoque->produto_estoque_id = $request->produto_estoque_id;
+            $estoque->save();
+        }else{
+            if($request->quantidade_estoque == 0){
+                $e->quantidade_estoque = $request->quantidade_estoque;
+            }
+            if($request->quantidade_estoque != 0){
+                $e->quantidade_estoque = $e->quantidade_estoque + $request->quantidade_estoque;
+            }
+
+            $e->save();
+        }
+
+
 
         return redirect('/produtos');
     }

@@ -11,11 +11,11 @@
     </div>
 @endif
     <div class="row">
-        <h4 class="mx-auto">Novo Cliente</h4>
+        <h4 class="mx-auto">Editar Cliente</h4>
     </div>
     <div class="row justify-content-center">
         <div class="col-md-8" >
-        <form class="form-horizontal" method="post" action="{{url('clientes')}}">
+        <form class="form-horizontal" method="POST" action="{{url('clientes', $cliente->id)}}" enctype="multipart/form-data">
               {{csrf_field()}}
               {{ method_field('PUT') }}
                 <div class="form-group">
@@ -30,12 +30,6 @@
                     <label for="">CNPJ</label>
                     <input type="number" name="cnpj" value="{{$cliente->cnpj}}"  class="form-control" placeholder="CNPJ">
                 </div>
-                @foreach ($cliente->telefones as $item)
-                    <div class="form-group">
-                        <label for="">Telefone</label>
-                        <input type="number" name="telefone" value="{{$item->telefone}}" class="form-control" placeholder="Telefone">
-                    </div>
-                 @endforeach
                 <div class="form-group">
                     <button type="submit" class="btn btn-success">Salvar</button>
                 </div>

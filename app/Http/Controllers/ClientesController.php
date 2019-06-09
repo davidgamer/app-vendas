@@ -89,7 +89,18 @@ class ClientesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+           Validator::make($request->all(), [
+          'nome' => 'required|max:255',
+          'cpf' => 'required|numeric',
+          'cnpj' =>'required|numeric',
+
+        ])->validate();
+        $cliente =  Clientes::find($id);
+        $cliente->nome =  $request->nome;
+        $cliente->cpf = $request->cpf;
+        $cliente->cnpj = $request->cnpj;
+        $cliente->save();
+        return redirect('/clientes');
     }
 
     /**
