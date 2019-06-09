@@ -17,7 +17,7 @@ class CreateVendasTable extends Migration
             $table->bigIncrements('id');
             $table->float('total_venda');
             $table->bigInteger('cliente_venda_id')->unsigned()->nullable();
-
+            $table->date('data_venda');
             $table->foreign('cliente_venda_id')
                     ->references('id')->on('clientes')
                     ->onDelete('cascade');

@@ -17,6 +17,6 @@ class Clientes extends Model
         return $this->hasMany(Telefones::class);
     }
      public function vendas(){
-        return $this->hasMany(Venda::class);
+        return $this->hasMany(Venda::class, 'cliente_venda_id');
     }
 }

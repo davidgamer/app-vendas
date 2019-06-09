@@ -4,5 +4,9 @@
 // Variables
 @import 'variables';
 
+.card {
+    cursor: pointer;
+}
+
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';

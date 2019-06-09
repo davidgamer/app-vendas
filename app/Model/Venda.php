@@ -9,7 +9,7 @@ class Venda extends Model
 {
 
     public function itemVenda(){
-       return $this->hasMany(ItemVenda::class);
+       return $this->hasMany(ItemVenda::class, 'venda_item_venda_id');
     }
     public function clientes(){
         return $this->belongsTo(Clientes::class);
