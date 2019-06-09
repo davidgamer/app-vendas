@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
 
          factory(\App\Model\Clientes::class, 2)->create();
          factory(\App\Model\Telefones::class, 2)->create();
-         factory(\App\Model\Enderecos::class, 2)->create();
+         factory(\App\Model\Enderecos::class, 6)->create();
          factory(\App\Model\Marca::class, 2)->create();
          factory(\App\Model\Produtos::class, 2)->create();
          factory(\App\Model\Estoque::class, 2)->create();

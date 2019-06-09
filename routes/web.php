@@ -11,12 +11,14 @@
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/', function () {
+    return view('home.index');
+});
 
 
 Route::resource('/clientes', 'ClientesController');
 Route::resource('/produtos', 'ProdutosController');
 Route::resource('/vendas', 'VendaController');
 Route::resource('/estoques', 'EstoqueController');
+Route::resource('/telefones', 'TelefoneController');
+Route::resource('/enderecos', 'EnderecoController');

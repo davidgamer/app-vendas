@@ -11,10 +11,10 @@ class Clientes extends Model
 {
 
     public function enderecos (){
-        return $this->hasMany(Enderecos::class);
+        return $this->hasMany(Enderecos::class,'cliente_enderecos_id');
     }
     public function telefones(){
-        return $this->hasMany(Telefones::class);
+        return $this->hasMany(Telefones::class, 'telefones_clientes_id');
     }
      public function vendas(){
         return $this->hasMany(Venda::class, 'cliente_venda_id');

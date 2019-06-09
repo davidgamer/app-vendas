@@ -3,11 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Model\Clientes;
 use App\Model\Telefones;
-use Illuminate\Support\Facades\Validator;
 
-class ClientesController extends Controller
+class TelefoneController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +14,7 @@ class ClientesController extends Controller
      */
     public function index()
     {
-        $clientes = Clientes::all();
-        return view('clientes.index')->with('clientes', $clientes);
+        //
     }
 
     /**
@@ -27,7 +24,7 @@ class ClientesController extends Controller
      */
     public function create()
     {
-        return view('clientes.create');
+
     }
 
     /**
@@ -38,22 +35,11 @@ class ClientesController extends Controller
      */
     public function store(Request $request)
     {
-        Validator::make($request->all(), [
-          'nome' => 'required|max:255',
-          'cpf' => 'required|numeric',
-          'cnpj' =>'required|numeric',
-          'telefone'=>'required|max:255'
-        ])->validate();
-        $cliente = new Clientes;
-        $cliente->nome =  $request->nome;
-        $cliente->cpf = $request->cpf;
-        $cliente->cnpj = $request->cnpj;
-        $cliente->save();
         $telefone = new Telefones;
         $telefone->telefone = $request->telefone;
-        $telefone->telefones_clientes_id = $cliente->id;
+        $telefone->telefones_clientes_id = $request->telefones_clientes_id;
         $telefone->save();
-        return redirect('/clientes');
+        return redirect()->back();
     }
 
     /**
@@ -64,8 +50,7 @@ class ClientesController extends Controller
      */
     public function show($id)
     {
-        $cliente = Clientes::with('telefones','enderecos')->find($id);
-        return view('clientes.show')->with('cliente', $cliente);
+         return view('telefones.create')->with('id', $id);
     }
 
     /**
@@ -76,8 +61,7 @@ class ClientesController extends Controller
      */
     public function edit($id)
     {
-        $cliente = Clientes::with('telefones')->find($id)->first();
-        return view('clientes.edit')->with('cliente', $cliente);
+        //
     }
 
     /**
@@ -100,8 +84,8 @@ class ClientesController extends Controller
      */
     public function destroy($id)
     {
-        $cliente = Clientes::find($id);
-        $cliente->delete();
-        return redirect('/clientes');
+        $telefone = Telefones::find($id);
+        $telefone->delete();
+        return redirect()->back();
     }
 }

@@ -3,11 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Model\Clientes;
-use App\Model\Telefones;
-use Illuminate\Support\Facades\Validator;
+use App\Model\Enderecos;
 
-class ClientesController extends Controller
+class EnderecoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +14,7 @@ class ClientesController extends Controller
      */
     public function index()
     {
-        $clientes = Clientes::all();
-        return view('clientes.index')->with('clientes', $clientes);
+        //
     }
 
     /**
@@ -27,7 +24,7 @@ class ClientesController extends Controller
      */
     public function create()
     {
-        return view('clientes.create');
+        //
     }
 
     /**
@@ -38,22 +35,14 @@ class ClientesController extends Controller
      */
     public function store(Request $request)
     {
-        Validator::make($request->all(), [
-          'nome' => 'required|max:255',
-          'cpf' => 'required|numeric',
-          'cnpj' =>'required|numeric',
-          'telefone'=>'required|max:255'
-        ])->validate();
-        $cliente = new Clientes;
-        $cliente->nome =  $request->nome;
-        $cliente->cpf = $request->cpf;
-        $cliente->cnpj = $request->cnpj;
-        $cliente->save();
-        $telefone = new Telefones;
-        $telefone->telefone = $request->telefone;
-        $telefone->telefones_clientes_id = $cliente->id;
-        $telefone->save();
-        return redirect('/clientes');
+        $endereco = new Enderecos;
+        $endereco->cep = $request->cep;
+        $endereco->bairro = $request->bairro;
+        $endereco->rua = $request->rua;
+        $endereco->numero = $request->numero;
+        $request->cliente_enderecos_id = $request->cliente_enderecos_id;
+        $endereco->save();
+        return redirect()->back();
     }
 
     /**
@@ -64,8 +53,7 @@ class ClientesController extends Controller
      */
     public function show($id)
     {
-        $cliente = Clientes::with('telefones','enderecos')->find($id);
-        return view('clientes.show')->with('cliente', $cliente);
+        return view('enderecos.create')->with('id', $id);
     }
 
     /**
@@ -76,8 +64,8 @@ class ClientesController extends Controller
      */
     public function edit($id)
     {
-        $cliente = Clientes::with('telefones')->find($id)->first();
-        return view('clientes.edit')->with('cliente', $cliente);
+           $endereco = Enderecos::find($id);
+           return view('enderecos.edit')->with('endereco', $endereco);
     }
 
     /**
@@ -89,7 +77,14 @@ class ClientesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $endereco = Enderecos::find($id);
+        $endereco->cep = $request->cep;
+        $endereco->bairro = $request->bairro;
+        $endereco->rua = $request->rua;
+        $endereco->numero = $request->numero;
+        $request->cliente_enderecos_id = $request->cliente_enderecos_id;
+        $endereco->save();
+        return redirect()->back();
     }
 
     /**
@@ -100,8 +95,8 @@ class ClientesController extends Controller
      */
     public function destroy($id)
     {
-        $cliente = Clientes::find($id);
-        $cliente->delete();
-        return redirect('/clientes');
+        $endereco = Enderecos::find($id);
+        $endereco->delete();
+        return redirect()->back();
     }
 }
